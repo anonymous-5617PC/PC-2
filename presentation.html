@@ -15,6 +15,8 @@
   --gold-light:#e7cd8a;
   --ivory:#f2ece0;
   --crimson:#7c2333;
+  --blossom:#eec3cf;
+  --leaf:#8aab84;
   --font-display:'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-body:'PT Serif', Georgia, serif;
 }
@@ -36,7 +38,7 @@ body{
 
 nav.dots{position:fixed;right:1.6rem;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;align-items:center;}
 nav.dots::before{content:"";position:absolute;top:4px;bottom:4px;left:50%;width:1px;background:rgba(231,205,138,.22);transform:translateX(-50%);z-index:-1;}
-nav.dots .dot{-webkit-appearance:none;appearance:none;display:block;width:8px;height:8px;border-radius:50%;background:transparent;border:1px solid rgba(231,205,138,.55);margin:10px 0;padding:0;cursor:pointer;transition:background .4s ease,transform .4s ease,border-color .4s ease;}
+nav.dots .dot{-webkit-appearance:none;appearance:none;display:block;width:8px;height:8px;border-radius:50%;background:transparent;border:1px solid rgba(231,205,138,.55);margin:8px 0;padding:0;cursor:pointer;transition:background .4s ease,transform .4s ease,border-color .4s ease;}
 nav.dots .dot.active{background:var(--gold-light);border-color:var(--gold-light);transform:scale(1.3);}
 nav.dots .dot:focus-visible{outline:2px solid var(--gold-light);outline-offset:3px;}
 @media (max-width:640px){ nav.dots{right:.8rem;} }
@@ -110,7 +112,46 @@ nav.dots .dot:focus-visible{outline:2px solid var(--gold-light);outline-offset:3
 .closing-line{font-family:var(--font-body);font-style:italic;font-size:clamp(1rem,1.6vw,1.12rem);line-height:1.6;color:var(--ivory);
   border-top:1px solid rgba(231,205,138,.25);padding-top:1.2rem;margin:0;}
 
-/* ---------- slide 3: theme ---------- */
+/* ---------- story panels: Acts I–IV ---------- */
+.story-slide .slide-content{display:flex;gap:2.6rem;align-items:center;text-align:left;max-width:920px;}
+.story-slide .story-text{flex:1 1 320px;}
+.story-slide .story-visual{flex:1 1 260px;max-width:320px;width:100%;aspect-ratio:4/3;position:relative;}
+@media (max-width:760px){
+  .story-slide .slide-content{flex-direction:column;}
+  .story-slide .story-visual{max-width:280px;}
+}
+
+.act-label{font-family:var(--font-body);font-style:italic;font-size:.85rem;color:var(--gold-light);opacity:.85;margin:0 0 .4rem;}
+.story-slide h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.5rem,3.4vw,2.3rem);margin:0 0 .8rem;}
+
+.event-list{list-style:none;margin:0 0 .4rem;padding:0;font-family:var(--font-body);font-size:clamp(.92rem,1.2vw,1rem);line-height:1.6;color:rgba(242,236,224,.85);}
+.event-list li{position:relative;padding-left:1.3rem;margin-bottom:.5rem;}
+.event-list li::before{content:"—";position:absolute;left:0;color:var(--gold);}
+
+.story-visual .scene{position:absolute;inset:0;opacity:0;animation:cycleFade2 8s ease-in-out infinite;}
+.story-visual .scene svg{width:100%;height:100%;display:block;color:#05040a;}
+.story-visual .scene:nth-child(1){animation-delay:0s;}
+.story-visual .scene:nth-child(2){animation-delay:-4s;}
+.story-visual.has-three .scene{animation:cycleFade3 12s ease-in-out infinite;}
+.story-visual.has-three .scene:nth-child(1){animation-delay:0s;}
+.story-visual.has-three .scene:nth-child(2){animation-delay:-4s;}
+.story-visual.has-three .scene:nth-child(3){animation-delay:-8s;}
+@keyframes cycleFade2{0%{opacity:0;}8%{opacity:1;}42%{opacity:1;}50%{opacity:0;}100%{opacity:0;}}
+@keyframes cycleFade3{0%{opacity:0;}6%{opacity:1;}28%{opacity:1;}36%{opacity:0;}100%{opacity:0;}}
+
+/* ---------- Act IV: forgiveness ---------- */
+.slide--forgiveness .slide-content{text-align:center;}
+.slide--forgiveness .intro{margin-left:auto;margin-right:auto;}
+.slide--forgiveness h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.5rem,3.4vw,2.3rem);margin:.2rem 0 1rem;}
+.bloom-graphic{width:min(70vw,340px);height:auto;margin:0 auto 1.2rem;display:block;}
+.bloom-graphic .chain-ring{fill:none;stroke:var(--gold);stroke-width:3;}
+.bloom-graphic .vine{fill:none;stroke:var(--gold);stroke-width:2;stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.8s ease .3s;}
+.in-view .bloom-graphic .vine{stroke-dashoffset:0;}
+.bloom-graphic .petal{fill:var(--blossom);opacity:0;transition:opacity .8s ease var(--d,0s);}
+.bloom-graphic .leaf{fill:var(--leaf);opacity:0;transition:opacity .8s ease var(--d,0s);}
+.in-view .bloom-graphic .petal,.in-view .bloom-graphic .leaf{opacity:.95;}
+
+/* ---------- theme panel ---------- */
 .slide--theme .slide-content{text-align:center;}
 .eye-graphic{width:min(58vw,210px);height:auto;margin:0 auto 1.5rem;display:block;}
 .eye-graphic .eye-outline{fill:none;stroke:var(--gold);stroke-width:1.4;stroke-dasharray:420;stroke-dashoffset:420;transition:stroke-dashoffset 1.7s ease;}
@@ -129,7 +170,7 @@ nav.dots .dot:focus-visible{outline:2px solid var(--gold-light);outline-offset:3
 .verse{list-style:none;margin:0;padding:0;font-family:var(--font-display);font-style:italic;font-size:clamp(1.05rem,1.8vw,1.28rem);line-height:2.05;color:var(--ivory);}
 .verse li{margin:0;}
 
-/* ---------- slide 4: closing ---------- */
+/* ---------- closing reflection panel ---------- */
 .slide--closing .slide-content{text-align:center;}
 .closing-quote{font-family:var(--font-display);font-style:italic;font-weight:500;font-size:clamp(1.4rem,3.2vw,2.05rem);line-height:1.42;margin:0 0 .7rem;}
 .closing-note{font-family:var(--font-body);font-size:.83rem;color:rgba(242,236,224,.55);letter-spacing:.02em;margin:0;}
@@ -138,6 +179,8 @@ nav.dots .dot:focus-visible{outline:2px solid var(--gold-light);outline-offset:3
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
   #scroller{scroll-behavior:auto;}
+  .story-visual .scene{animation:none !important;opacity:0;}
+  .story-visual .scene:first-child{opacity:1;}
 }
 </style>
 </head>
@@ -164,6 +207,98 @@ nav.dots .dot:focus-visible{outline:2px solid var(--gold-light);outline-offset:3
       <line x1="690" y1="75" x2="690" y2="52" stroke="currentColor" stroke-width="3"/>
       <line x1="681" y1="58" x2="699" y2="58" stroke="currentColor" stroke-width="3"/>
     </symbol>
+
+    <symbol id="vladimir-houses" viewBox="0 0 400 160">
+      <rect x="0" y="140" width="400" height="20" fill="currentColor"/>
+      <rect x="40" y="90" width="70" height="50" fill="currentColor"/>
+      <polygon points="30,90 75,55 120,90" fill="currentColor"/>
+      <rect x="140" y="75" width="90" height="65" fill="currentColor"/>
+      <polygon points="128,75 185,35 242,75" fill="currentColor"/>
+      <rect x="270" y="100" width="55" height="40" fill="currentColor"/>
+      <polygon points="262,100 297,72 332,100" fill="currentColor"/>
+      <rect x="362" y="118" width="16" height="22" fill="currentColor"/>
+      <path d="M354,118 Q350,98 370,85 Q390,98 386,118 Z" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="family-group" viewBox="0 0 300 200">
+      <circle cx="70" cy="95" r="15" fill="currentColor"/>
+      <rect x="60" y="72" width="20" height="10" fill="currentColor"/>
+      <path d="M48,190 L54,112 Q70,100 86,112 L92,190 Z" fill="currentColor"/>
+      <circle cx="150" cy="100" r="13" fill="currentColor"/>
+      <polygon points="134,92 166,92 150,72" fill="currentColor"/>
+      <path d="M124,190 L136,115 Q150,105 164,115 L176,190 Z" fill="currentColor"/>
+      <circle cx="205" cy="140" r="9" fill="currentColor"/>
+      <path d="M195,190 L199,130 Q205,124 211,130 L215,190 Z" fill="currentColor"/>
+      <circle cx="235" cy="142" r="8" fill="currentColor"/>
+      <path d="M226,190 L230,132 Q235,127 240,132 L244,190 Z" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="inn" viewBox="0 0 300 200">
+      <rect x="0" y="180" width="300" height="20" fill="currentColor"/>
+      <rect x="60" y="90" width="160" height="90" fill="currentColor"/>
+      <polygon points="45,90 140,40 235,90" fill="currentColor"/>
+      <rect x="190" y="55" width="14" height="35" fill="currentColor"/>
+      <rect x="125" y="130" width="30" height="50" fill="none" stroke="currentColor" stroke-width="2"/>
+      <line x1="235" y1="90" x2="255" y2="90" stroke="currentColor" stroke-width="2"/>
+      <rect x="248" y="90" width="18" height="14" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="carriage" viewBox="0 0 320 160">
+      <rect x="0" y="140" width="320" height="20" fill="currentColor"/>
+      <ellipse cx="90" cy="112" rx="36" ry="20" fill="currentColor"/>
+      <path d="M124,102 L152,78 L160,88 L142,114 Z" fill="currentColor"/>
+      <line x1="70" y1="130" x2="70" y2="140" stroke="currentColor" stroke-width="4"/>
+      <line x1="85" y1="130" x2="85" y2="140" stroke="currentColor" stroke-width="4"/>
+      <line x1="100" y1="130" x2="100" y2="140" stroke="currentColor" stroke-width="4"/>
+      <line x1="115" y1="130" x2="115" y2="140" stroke="currentColor" stroke-width="4"/>
+      <polygon points="170,130 170,105 190,90 280,90 280,130" fill="currentColor"/>
+      <circle cx="200" cy="135" r="15" fill="none" stroke="currentColor" stroke-width="3"/>
+      <circle cx="255" cy="135" r="15" fill="none" stroke="currentColor" stroke-width="3"/>
+      <circle cx="210" cy="100" r="8" fill="currentColor"/>
+      <path d="M203,120 L203,102 Q210,96 217,102 L217,120 Z" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="knife" viewBox="0 0 120 60">
+      <rect x="8" y="24" width="20" height="12" rx="3" fill="currentColor"/>
+      <polygon points="28,26 85,20 96,30 85,40 28,34" fill="currentColor"/>
+      <path d="M92,30 Q102,38 92,47 Q83,38 92,30 Z" fill="#7c2333"/>
+    </symbol>
+
+    <symbol id="prison" viewBox="0 0 320 200">
+      <rect x="0" y="175" width="320" height="25" fill="currentColor"/>
+      <rect x="30" y="85" width="6" height="90" fill="currentColor"/>
+      <rect x="52" y="85" width="6" height="90" fill="currentColor"/>
+      <rect x="74" y="85" width="6" height="90" fill="currentColor"/>
+      <rect x="96" y="85" width="6" height="90" fill="currentColor"/>
+      <rect x="118" y="85" width="6" height="90" fill="currentColor"/>
+      <rect x="140" y="85" width="6" height="90" fill="currentColor"/>
+      <rect x="162" y="85" width="6" height="90" fill="currentColor"/>
+      <rect x="184" y="85" width="6" height="90" fill="currentColor"/>
+      <rect x="206" y="85" width="6" height="90" fill="currentColor"/>
+      <rect x="228" y="85" width="6" height="90" fill="currentColor"/>
+      <rect x="250" y="85" width="6" height="90" fill="currentColor"/>
+      <rect x="272" y="85" width="6" height="90" fill="currentColor"/>
+      <rect x="100" y="110" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2"/>
+      <line x1="110" y1="110" x2="110" y2="140" stroke="currentColor" stroke-width="1.5"/>
+      <line x1="120" y1="110" x2="120" y2="140" stroke="currentColor" stroke-width="1.5"/>
+      <rect x="250" y="40" width="40" height="100" fill="currentColor"/>
+      <polygon points="245,40 270,15 295,40" fill="currentColor"/>
+      <rect x="264" y="55" width="12" height="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    </symbol>
+
+    <symbol id="two-figures" viewBox="0 0 300 200">
+      <rect x="0" y="190" width="300" height="10" fill="currentColor"/>
+      <rect x="120" y="20" width="60" height="50" fill="none" stroke="currentColor" stroke-width="2"/>
+      <line x1="140" y1="20" x2="140" y2="70" stroke="currentColor" stroke-width="1.5"/>
+      <line x1="150" y1="20" x2="150" y2="70" stroke="currentColor" stroke-width="1.5"/>
+      <line x1="160" y1="20" x2="160" y2="70" stroke="currentColor" stroke-width="1.5"/>
+      <polygon points="130,70 170,70 205,190 95,190" fill="#e7cd8a" opacity="0.08"/>
+      <circle cx="90" cy="142" r="13" fill="currentColor"/>
+      <path d="M78,195 L82,158 Q90,150 98,158 L102,195 Z" fill="currentColor"/>
+      <circle cx="210" cy="138" r="13" fill="currentColor"/>
+      <path d="M198,195 L202,154 Q210,146 218,154 L222,195 Z" fill="currentColor"/>
+      <line x1="222" y1="165" x2="240" y2="158" stroke="currentColor" stroke-width="4"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -173,8 +308,12 @@ nav.dots .dot:focus-visible{outline:2px solid var(--gold-light);outline-offset:3
 <nav class="dots" aria-label="Slide navigation">
   <button class="dot" data-target="slide-1" aria-label="Title"></button>
   <button class="dot" data-target="slide-2" aria-label="Russian literature overview"></button>
-  <button class="dot" data-target="slide-3" aria-label="Themes and reflection"></button>
-  <button class="dot" data-target="slide-4" aria-label="Closing"></button>
+  <button class="dot" data-target="slide-3" aria-label="Act I: Founding stage"></button>
+  <button class="dot" data-target="slide-4" aria-label="Act II: Change of events"></button>
+  <button class="dot" data-target="slide-5" aria-label="Act III: Realization"></button>
+  <button class="dot" data-target="slide-6" aria-label="Act IV: Closing stage"></button>
+  <button class="dot" data-target="slide-7" aria-label="Themes and reflection"></button>
+  <button class="dot" data-target="slide-8" aria-label="Closing"></button>
 </nav>
 
 <main id="scroller">
@@ -223,7 +362,105 @@ nav.dots .dot:focus-visible{outline:2px solid var(--gold-light);outline-offset:3
     </div>
   </section>
 
-  <section id="slide-3" class="slide slide--theme">
+  <section id="slide-3" class="slide story-slide slide--founding">
+    <div class="slide-bg">
+      <div class="stars"></div>
+      <div class="aura" style="width:480px;height:480px;top:10%;right:-10%;background:radial-gradient(circle, rgba(201,162,75,.42), transparent 70%);"></div>
+    </div>
+    <div class="slide-content">
+      <div class="story-text">
+        <p class="act-label reveal" style="--d:0s">Act I</p>
+        <h2 class="reveal" style="--d:.1s">Vladimir, Before the Journey</h2>
+        <p class="intro reveal" style="--d:.2s">In the merchant town of Vladimir lived Ivan Dmitrich Aksionov — a young trader, a husband, a father of two, remembered for his good humor more than the temper of his youth.</p>
+        <p class="intro reveal" style="--d:.35s">One summer morning, against his wife's uneasy dream, he sets off alone for the fair at Nizhny Novgorod.</p>
+      </div>
+      <div class="story-visual reveal" style="--d:.3s">
+        <div class="scene"><svg viewBox="0 0 400 160" preserveAspectRatio="xMidYMax meet"><use href="#vladimir-houses"></use></svg></div>
+        <div class="scene"><svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMax meet"><use href="#family-group"></use></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="slide-4" class="slide story-slide slide--turning">
+    <div class="slide-bg">
+      <div class="stars"></div>
+      <div class="aura" style="width:480px;height:480px;bottom:-15%;left:-10%;background:radial-gradient(circle, rgba(124,35,51,.38), transparent 70%);"></div>
+    </div>
+    <div class="slide-content">
+      <div class="story-text">
+        <p class="act-label reveal" style="--d:0s">Act II</p>
+        <h2 class="reveal" style="--d:.1s">The Turn of the Road</h2>
+        <p class="intro reveal" style="--d:.2s">A day into the journey, he shares an inn with a fellow merchant — then rises before dawn to press on alone.</p>
+        <ul class="event-list">
+          <li class="reveal" style="--d:.3s">Leaves the inn before his companion wakes</li>
+          <li class="reveal" style="--d:.42s">Stopped on the highway and searched</li>
+          <li class="reveal" style="--d:.54s">A bloodstained knife found in his bag</li>
+          <li class="reveal" style="--d:.66s">The innkeeper lies murdered in his room</li>
+          <li class="reveal" style="--d:.78s">Tried, convicted, and sentenced to Siberia</li>
+        </ul>
+      </div>
+      <div class="story-visual has-three reveal" style="--d:.3s">
+        <div class="scene"><svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMax meet"><use href="#inn"></use></svg></div>
+        <div class="scene"><svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMax meet"><use href="#carriage"></use></svg></div>
+        <div class="scene"><svg viewBox="0 0 120 60" preserveAspectRatio="xMidYMid meet"><use href="#knife"></use></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="slide-5" class="slide story-slide slide--realization">
+    <div class="slide-bg">
+      <div class="stars"></div>
+      <div class="aura" style="width:460px;height:460px;top:-10%;left:50%;transform:translateX(-50%);background:radial-gradient(circle, rgba(210,220,235,.28), transparent 70%);"></div>
+    </div>
+    <div class="slide-content">
+      <div class="story-text">
+        <p class="act-label reveal" style="--d:0s">Act III</p>
+        <h2 class="reveal" style="--d:.1s">A Face Out of the Past</h2>
+        <p class="intro reveal" style="--d:.2s">Twenty-six years pass in a Siberian prison. Aged and devout, Aksionov is known to the other convicts simply as "Grandfather."</p>
+        <p class="intro reveal" style="--d:.35s">Among a new group of prisoners is an old man from Vladimir — and in his idle boasting, Aksionov hears the truth he has waited a lifetime for.</p>
+        <p class="closing-line reveal" style="--d:.5s">The real killer stands beside him, and does not know he has been heard.</p>
+      </div>
+      <div class="story-visual reveal" style="--d:.3s">
+        <div class="scene"><svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMax meet"><use href="#prison"></use></svg></div>
+        <div class="scene"><svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMax meet"><use href="#two-figures"></use></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="slide-6" class="slide slide--forgiveness">
+    <div class="slide-bg">
+      <div class="stars"></div>
+      <div class="aura" style="width:520px;height:520px;top:0;left:50%;transform:translateX(-50%);background:radial-gradient(circle, rgba(238,195,207,.4), transparent 70%);"></div>
+    </div>
+    <div class="slide-content">
+      <p class="act-label reveal" style="--d:0s">Act IV</p>
+      <svg class="bloom-graphic reveal" style="--d:.1s" viewBox="0 0 320 160">
+        <ellipse class="chain-ring" cx="40" cy="92" rx="17" ry="11" transform="rotate(-18 40 92)"></ellipse>
+        <ellipse class="chain-ring" cx="66" cy="84" rx="17" ry="11" transform="rotate(18 66 84)"></ellipse>
+        <path class="chain-ring" d="M108,72 A17,11 20 1 1 98,108"></path>
+        <path class="vine" d="M104,90 C130,55 150,120 175,85 C195,58 205,105 230,70 C250,42 260,80 285,50 C298,35 305,45 310,30"></path>
+        <ellipse class="leaf" cx="175" cy="70" rx="10" ry="4" transform="rotate(-25 175 70)" style="--d:1.4s"></ellipse>
+        <circle class="petal" cx="150" cy="100" r="5" style="--d:1.6s"></circle>
+        <circle class="petal" cx="156" cy="96" r="4" style="--d:1.6s"></circle>
+        <circle class="petal" cx="145" cy="95" r="4" style="--d:1.6s"></circle>
+        <circle class="petal" cx="195" cy="65" r="5" style="--d:1.8s"></circle>
+        <circle class="petal" cx="201" cy="61" r="4" style="--d:1.8s"></circle>
+        <circle class="petal" cx="190" cy="60" r="4" style="--d:1.8s"></circle>
+        <circle class="petal" cx="230" cy="90" r="5" style="--d:2s"></circle>
+        <circle class="petal" cx="236" cy="86" r="4" style="--d:2s"></circle>
+        <circle class="petal" cx="225" cy="85" r="4" style="--d:2s"></circle>
+        <circle class="petal" cx="285" cy="45" r="5" style="--d:2.2s"></circle>
+        <circle class="petal" cx="291" cy="41" r="4" style="--d:2.2s"></circle>
+        <circle class="petal" cx="280" cy="40" r="4" style="--d:2.2s"></circle>
+        <ellipse class="leaf" cx="250" cy="55" rx="10" ry="4" transform="rotate(20 250 55)" style="--d:2.4s"></ellipse>
+      </svg>
+      <h2 class="reveal" style="--d:.2s">The Weight Set Down</h2>
+      <p class="intro reveal" style="--d:.3s">Aksionov cannot bring himself to take revenge. When the old man finally confesses and begs forgiveness, Aksionov forgives him completely — and feels, for the first time in twenty-six years, at peace.</p>
+      <p class="closing-note reveal" style="--d:.45s">Word of his innocence reaches the authorities at last — but by the time the pardon arrives, Aksionov is already gone.</p>
+    </div>
+  </section>
+
+  <section id="slide-7" class="slide slide--theme">
     <div class="slide-bg">
       <div class="stars"></div>
       <div class="aura" style="width:480px;height:480px;top:2%;left:50%;transform:translateX(-50%);background:radial-gradient(circle, rgba(124,35,51,.35), transparent 70%);"></div>
@@ -254,7 +491,7 @@ nav.dots .dot:focus-visible{outline:2px solid var(--gold-light);outline-offset:3
     </div>
   </section>
 
-  <section id="slide-4" class="slide slide--closing">
+  <section id="slide-8" class="slide slide--closing">
     <div class="slide-bg">
       <div class="horizon-glow"></div>
       <svg class="domes-art" viewBox="0 0 800 260" preserveAspectRatio="xMidYMax slice"><use href="#domes"></use></svg>
